@@ -2,6 +2,8 @@
     box-sizing: border-box;
 }
 
+/* Background is on body */
+
 body{
     margin: 0;
     background-image: url("../images/log-in-background.jpg");
@@ -20,15 +22,7 @@ body:after{
     background: rgba(0,0,0,0.7);
    
 }
-/* .bg-img{
-   
-   
-} */
-
-/* .bg-img:after{
-
-} */
-
+/* css for login page */
 .login-container{
     background-color:rgba(255,255,255,0.04);
     width: 350px;
@@ -40,7 +34,7 @@ body:after{
     text-align: center;
     padding: 60px 32px
 }
-
+/* Heading of login page */
 .login-container header{
     color: white;
     font-weight: 600;
@@ -48,7 +42,7 @@ body:after{
     margin: 0 0 35px 0;
     font-family:  sans-serif;
 }
-
+/* input area of email and password */
 .field{
     position: relative;
     height: 3rem;
@@ -64,9 +58,11 @@ body:after{
     font-size: 1rem;
     font-family: 'Poppins', sans-serif;
 }
+
 .space{
     margin-top:17px;
 }
+
 .fa{
     position: absolute;
 }
