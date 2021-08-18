@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="login.css"> 
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
+       
+<body>
+    <div class="login-container"> <!--main login body-->
+        <header>Login Form</header>
+        <form action="/login", method="POST">
+            <div class="field">
+                <span class="fa fa-user"></span>  <!--user icon-->
+                <input type="text" name = "email" placeholder="Email or Phone" required> <!--input email-->
+                
+            </div>
+            <div class="field space">
+                <span class = "fa fa-lock"></span> <!--password icon-->
+                <input type="password" name = "password" placeholder="password" class = "password"required> <!--input password-->
+                <span class="show">SHOW</span>
+            </div>
+            <div class="pass"> <!--div for forget password-->
+                <a href="#">Forget Password</a>
+            </div>
+            <div class="field space">
+                <input type="submit" value="LOGIN"> <!--LOGIN button-->
+            </div>
+        </form>
+        <div class="create">
+            <span class="sign-up">Don't have account? <a href="#">Signup Now</a> </span>
+        </div>
+    </div>
+    
+<script src="script.js"></script>
+</body>
+</html>
