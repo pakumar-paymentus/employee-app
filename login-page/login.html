@@ -11,15 +11,15 @@
 <body>
     <div class="login-container"> <!--main login body-->
         <header>Login Form</header>
-        <form action="#">
+        <form action="/login" method="POST">
             <div class="field">
                 <span class="fa fa-user"></span>  <!--user icon-->
-                <input type="text" placeholder="Email or Phone" required> <!--input email-->
+                <input type="text" name = "email" placeholder="Email or Phone" required> <!--input email-->
                 
             </div>
             <div class="field space">
                 <span class = "fa fa-lock"></span> <!--password icon-->
-                <input type="password" placeholder="password" class = "password"required> <!--input password-->
+                <input type="password" name = "password" placeholder="password" class = "password"required> <!--input password-->
                 <span class="show">SHOW</span>
             </div>
             <div class="pass"> <!--div for forget password-->

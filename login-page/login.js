@@ -1,11 +1,13 @@
 
-
+// const login_cred = JSON.parse(fs.readFileSync("../login-data.json"));
+// console.log(login_cred);
 const SELECTOR = {
     passField : document.querySelector(".password"),
-    showBtn : document.querySelector(".show")
+    showBtn : document.querySelector(".show"),
+    loginBtn : document.querySelector("input[type = 'submit']")
 }
 
-SELECTOR.showBtn.addEventListener("click", function(){
+SELECTOR.showBtn.addEventListener("click", () => {
     if(SELECTOR.passField.type == "password"){
         SELECTOR.passField.type = "text";
         SELECTOR.showBtn.textContent = "HIDE"; 
@@ -15,4 +17,7 @@ SELECTOR.showBtn.addEventListener("click", function(){
     }
  });
 
+ SELECTOR.loginBtn.addEventListener("click", () => {
+    console.log("login button clicked");
+ })
  
