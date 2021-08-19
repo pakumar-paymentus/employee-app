@@ -7,7 +7,7 @@ app.use(bodyParser.urlencoded({extended : false}));
 const users = JSON.parse(fs.readFileSync("../users.json", "utf-8"));
 
 
-const staticPath = path.join(__dirname,"../login-page");
+const staticPath = path.join(__dirname,"../login-page/public");
 console.log(staticPath);
 app.use(express.static(staticPath));
 
@@ -16,7 +16,7 @@ app.get("/", (req, res) => {
 })
 
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../login-page/login.html"));
+    res.sendFile(path.join(__dirname, "../login-page/public/login.html"));
 })
 
 
