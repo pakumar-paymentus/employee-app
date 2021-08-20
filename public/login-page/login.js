@@ -17,7 +17,3 @@ SELECTOR.showBtn.addEventListener("click", () => {
     }
  });
 
- SELECTOR.loginBtn.addEventListener("click", () => {
-    console.log("login button clicked");
- })
- 

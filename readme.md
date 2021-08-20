@@ -1,14 +1,6 @@
-> ### This is sample project of login page for learning backend 
+### This is the the login page which is running on the port 3000, which is taking your login credentials and check your athorization.  
 
----
+This is the sample practice project for getting familliar with  backend development.
 
-> **server.js is server file for this project**
-
-> **all the dependency framework used are in package.json file**
-
->**server port: 3000**
-
->**admin : Pawan Kumar**
-
->**mentor : Sunil Garg**
-
+**admin : Pawan Kumar**
+**mentor : Sunil Garg**

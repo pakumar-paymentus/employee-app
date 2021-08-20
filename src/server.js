@@ -1,47 +1,46 @@
-const express = require("express");
-const app = express();
-const path = require("path");
-const fs = require("fs");
-const bodyParser = require("body-parser"); //Middleware
+const express = require("express");      // impoorting express library 
+const app = express();            // creating app using express library
+
+const path = require("path");   // importing path module 
+const fs = require("fs");       // importing fs module
+const {checkAuthentication} = require("./api/auth");
+
+
+//Middleware
+const bodyParser = require("body-parser");      
 app.use(bodyParser.urlencoded({extended : false}));
-const users = JSON.parse(fs.readFileSync("../users.json", "utf-8"));
 
 
-const staticPath = path.join(__dirname,"../login-page/public");
-console.log(staticPath);
+
+//home page that we wish to show when user come at our website
+const staticPath = path.join(__dirname,"../public/login-page");
 app.use(express.static(staticPath));
 
+//home page showing
 app.get("/", (req, res) => {
     res.send(staticPath);
 })
 
+//login page showing
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../login-page/public/login.html"));
+    res.sendFile(path.join(__dirname, "../public/login-page/login.html"));
 })
 
-
-
-checkAuthentication = (useremail, userpass) => {
-    for(let i = 0; i < users.length; i++){
-        let user = users[i];
-        let email = user.email;
-        let password = user.password;
-
-        if(email == useremail && password == userpass){
-            return true;
-        }else return false;
-    }
-    return false
-}
-
+// checking authenticationa and serving to new tab
 app.post("/login", (req, res) => {
-    const useremail = req.body.email;
+    const userEmail = req.body.email;
     const userpass = req.body.password;
-    if(checkAuthentication(useremail, userpass) == true){
-        res.send("Autharize to login Window");
-    }else{
-        res.send("You are not authorized");
-    }
+    const authStatusPromise = checkAuthentication(userEmail, userpass);
+    authStatusPromise.then((status) => {
+        if(status == true)
+            res.send("You are authorized to login Window");
+        else 
+            res.status(401).send("login email or pasword is incorrect");
+    })    
+    .catch((err) => {
+        console.log(err);
+    })
+  
 })
 
 
