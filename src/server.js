@@ -51,7 +51,7 @@ app.post("/login", (req, res) => {
         return authStatusPromise;
     })
     .then((status) => {
-        if(status == true)
+        if(status === true)
         res.send("You are authorized to login Window");
         else 
         res.status(401).send("login email or pasword is incorrect");

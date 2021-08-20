@@ -17,8 +17,10 @@ const checkAuthentication = async (userEmail, userPass) => {
            const user = users[i];
            const email = user.email;
            const pass = user.password;
+           const checkEmail = await bcrypt.compare(email, userEmail);
+           const checkPass = await bcrypt.compare(pass, userPass);
 
-           if(bcrypt.compare(email, userEmail) && bcrypt.compare(pass, userPass)){
+           if(checkEmail && checkPass){
                return true;
            }else return false;
        }
