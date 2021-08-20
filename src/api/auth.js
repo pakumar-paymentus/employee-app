@@ -1,5 +1,6 @@
 const fs = require("fs");
 const path = require("path");
+const bcrypt = require("bcrypt");
 
 const usersPath = path.join(__dirname, "../data/users.json");
 const users = JSON.parse(fs.readFileSync(usersPath, "utf-8")); // getting users credetials
@@ -8,13 +9,19 @@ const users = JSON.parse(fs.readFileSync(usersPath, "utf-8")); // getting users 
 
 // check login credentials
 const checkAuthentication = async (userEmail, userPass) => {
+    // console.log(userEmail);   here i'm checking that whether my email and password is hashed or not
+    // console.log(userPass);
+ 
     try{
-        const user = users.find(x => x.email === userEmail);
+       for(let i = 0; i < users.length; i++){
+           const user = users[i];
+           const email = user.email;
+           const pass = user.password;
 
-      if(user != undefined){
-        if(user.password === userPass) return true;
-        else return false;
-      }else return false;
+           if(bcrypt.compare(email, userEmail) && bcrypt.compare(pass, userPass)){
+               return true;
+           }else return false;
+       }
     }catch(err){
         console.log(err);
     }
