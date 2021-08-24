@@ -38,12 +38,15 @@ SELECTOR.loginBtn.addEventListener("click", (event) => {
         headers: {
         'Content-Type': 'application/json'
         },
+        redirect: 'follow',
       body: JSON.stringify(userData) // body data type must match "Content-Type" header
     });
-    return res.json(); // parses JSON response into native JavaScript objects
+    // console.log(res);
+    return res// parses JSON response into native JavaScript objects
+    
   }
-  
-  postData('http://localhost:3000/auth', userData)
+
+  postData("/auth", userData)
     .then(data => {
       console.log(data); // JSON data parsed by `data.json()` call
     })

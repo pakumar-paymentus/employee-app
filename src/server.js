@@ -18,6 +18,12 @@ app.use(bodyParser.json());
 //getting the auth function 
 const {checkAuthentication} = require("./api/auth");
 
+//redirects paths :
+
+const loginPath = path.join(__dirname, "../public/login-page/login.html");
+const welcomePath = path.join(__dirname, "../public/login-page/welcome.html");
+const errorPath = path.join(__dirname, "../public/login-page/401error.html");
+
 
 
 //home page that we wish to show when user come at our website
@@ -31,9 +37,16 @@ app.get("/", (req, res) => {
 
 //login page showing
 app.get("/login", (req, res) => {
-    res.sendFile(path.join(__dirname, "../public/login-page/login.html"));
+    res.sendFile(loginPath);
 })
 
+app.get("/welcome", (req, res) => {
+    res.sendFile(welcomePath);
+})
+
+app.get("/401error", (req, res) => {
+    res.sendFile(errorPath);
+})
 
 //hash the email id and password
 hashCredentials = async (userEmail, userPass) => {
@@ -43,13 +56,13 @@ hashCredentials = async (userEmail, userPass) => {
     return [userEmailHash, userPassHash];
 }
 
-
+//getting request from fetchApi for checking login credentials
 app.post("/auth", (req, res) => {
     const userData = req.body;
-    console.log(userData);
     const userEmail = userData.email;
     const userPass = userData.password;
 
+    //hash the credentials
     const userHashCredentials = hashCredentials(userEmail, userPass);
     userHashCredentials
     .then((user) => {
@@ -58,11 +71,10 @@ app.post("/auth", (req, res) => {
     })
     .then((status) => {
         if(status === true){
-            console.log("hi i am here");
-            res.send("You are authorized to login Window");
+            return res.redirect("/welcome");    //is credentials is authorized go to welcome windows 
         } 
         else 
-        res.status(401).send("login email or pasword is incorrect");
+        return res.redirect("/401error");       //otherwise goes to error window
     }) 
     .catch((err) => {
         console.log(err);
