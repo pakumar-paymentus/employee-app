@@ -1,10 +1,12 @@
+// const axios = require("axios");
 
-// const login_cred = JSON.parse(fs.readFileSync("../login-data.json"));
-// console.log(login_cred);
+let typedEmail;
+let typedPassword;
 const SELECTOR = {
     passField : document.querySelector(".password"),
     showBtn : document.querySelector(".show"),
-    loginBtn : document.querySelector("input[type = 'submit']")
+    loginBtn : document.querySelector("input[type = 'submit']"),
+    
 }
 
 SELECTOR.showBtn.addEventListener("click", () => {
@@ -16,4 +18,38 @@ SELECTOR.showBtn.addEventListener("click", () => {
         SELECTOR.showBtn.textContent = "SHOW"
     }
  });
+
+
+SELECTOR.loginBtn.addEventListener("click", (event) => {
+    // event.preventDefault();
+    console.log("login button was pressed");
+    typedEmail = document.getElementsByClassName("email")[0].value;
+    typedPassword = document.getElementsByClassName("password")[0].value;
+    
+    console.log(typedEmail);
+    console.log(typedPassword);
+    const userData = {email: typedEmail, password : typedPassword};
+
+    // Example POST method implementation:
+    postData = async (url, userData) => {
+    // Default options are marked with *
+     const res = await fetch(url, {
+        method: 'POST',
+        headers: {
+        'Content-Type': 'application/json'
+        },
+      body: JSON.stringify(userData) // body data type must match "Content-Type" header
+    });
+    return res.json(); // parses JSON response into native JavaScript objects
+  }
+  
+  postData('http://localhost:3000/auth', userData)
+    .then(data => {
+      console.log(data); // JSON data parsed by `data.json()` call
+    })
+    .catch(err => {
+        console.log(err);
+    })
+})
+
 
