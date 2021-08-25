@@ -8,26 +8,27 @@ const users = JSON.parse(fs.readFileSync(usersPath, "utf-8")); // getting users 
 
 
 // check login credentials
-const checkAuthentication = async (userEmail, userPass) => {
-    // console.log(userEmail);   here i'm checking that whether my email and password is hashed or not
-    // console.log(userPass);
- 
-    try{
+const checkAuthentication = (userEmail, userPass) => {
        for(let i = 0; i < users.length; i++){
-           const user = users[i];
-           const email = user.email;
-           const pass = user.password;
-           const checkEmail = await bcrypt.compare(email, userEmail);
-           const checkPass = await bcrypt.compare(pass, userPass);
-
-           if(checkEmail && checkPass){
-               return true;
-           }else return false;
+        if (users[i].email === userEmail){
+            const password = users[i].password;
+            if(password == userPass){
+                return true;
+            }else {
+                return false;
+            }
+        }
        }
-    }catch(err){
-        console.log(err);
+       return false;
     }
-}
+
+//hash the email id and password
+// hashCredentials = async (userEmail, userPass) => {
+//     const userEmailHash =  await bcrypt.hash(userEmail, 10);
+//     const userPassHash =  await bcrypt.hash(userPass, 10);
+ 
+//      return [userEmailHash, userPassHash];
+//  }
 
 module.exports = {
     checkAuthentication

@@ -11,23 +11,23 @@ const fs = require("fs");       // importing fs module
 const bcrypt = require("bcrypt"); // bcrypt fpr hashing email and password
 
 //Middleware
-const bodyParser = require("body-parser");      
-app.use(bodyParser.urlencoded({extended : false}));
+const bodyParser = require("body-parser");
+app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 //getting the auth function 
-const {checkAuthentication} = require("./api/auth");
+const { checkAuthentication } = require("./api/auth");
 
 //redirects paths :
 
-const loginPath = path.join(__dirname, "../public/login-page/login.html");
-const welcomePath = path.join(__dirname, "../public/login-page/welcome.html");
-const errorPath = path.join(__dirname, "../public/login-page/401error.html");
+const loginPath = path.join(__dirname, "../public/login-page/login/login.html");
+const home = path.join(__dirname, "../public/login-page/homepage/home.html");
+const errorPath = path.join(__dirname, "../public/login-page/error/error.html");
 
 
 
 //home page that we wish to show when user come at our website
-const staticPath = path.join(__dirname,"../public/login-page");
+const staticPath = path.join(__dirname, "../public/login-page");
 app.use(express.static(staticPath));
 
 //home page showing
@@ -40,46 +40,28 @@ app.get("/login", (req, res) => {
     res.sendFile(loginPath);
 })
 
-app.get("/welcome", (req, res) => {
-    res.sendFile(welcomePath);
-})
-
-app.get("/401error", (req, res) => {
-    res.sendFile(errorPath);
-})
-
-//hash the email id and password
-hashCredentials = async (userEmail, userPass) => {
-   const userEmailHash =  await bcrypt.hash(userEmail, 10);
-   const userPassHash =  await bcrypt.hash(userPass, 10);
-
-    return [userEmailHash, userPassHash];
-}
-
 //getting request from fetchApi for checking login credentials
 app.post("/auth", (req, res) => {
     const userData = req.body;
     const userEmail = userData.email;
     const userPass = userData.password;
-
-    //hash the credentials
-    const userHashCredentials = hashCredentials(userEmail, userPass);
-    userHashCredentials
-    .then((user) => {
-        const authStatusPromise = checkAuthentication(user[0], user[1]);
-        return authStatusPromise;
-    })
-    .then((status) => {
-        if(status === true){
-            return res.redirect("/welcome");    //is credentials is authorized go to welcome windows 
-        } 
-        else 
-        return res.redirect("/401error");       //otherwise goes to error window
-    }) 
-    .catch((err) => {
-        console.log(err);
-    })
-
+    const status = checkAuthentication(userEmail, userPass);
+    if (status === true) {
+        return res.send({
+            status: true,
+            data: {
+                name: "std"
+            }
+        });
+        
+    } else {
+        // return false;
+        res.status(401).send({ status: false,
+            err : {
+                msg : "username or password is incorrect"
+            }
+        });
+    }
 })
 
 app.listen(3000, () => {
