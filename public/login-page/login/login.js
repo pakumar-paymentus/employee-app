@@ -24,13 +24,16 @@ login = () => {
   console.log(password);
 
   loginApi(email, password)
-    .then(statusObj => {
-      console.log(statusObj);
-      //go to home page
-      //redirect here
+    .then(userObj => {
+      if (userObj.status){
+        console.log(userObj);
+        window.localStorage.setItem('user', userObj.accessToken);
+        // console.log(JSON.parse(window.localStorage.getItem('user')).accessToken);
+        window.location.href = "../homepage/home.html";
+      }
     })
     .catch(err => {
-      console.log("something went wrong " + err);
+      console.log("something went wrong try after some time" + err);
     })
   }
 
@@ -47,7 +50,7 @@ loginApi =  (email, password) => {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify(userData),
-    redirect: "error"
+
   })
   .then( (res) => {
     return res.json();

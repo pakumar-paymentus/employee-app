@@ -1,3 +1,5 @@
+require("dotenv").config();         //config for dotenv for excessing variables
+const jwt = require("jsonwebtoken");
 const axios = require("axios");
 
 const express = require("express");      // impoorting express library 
@@ -23,6 +25,7 @@ const { checkAuthentication } = require("./api/auth");
 const loginPath = path.join(__dirname, "../public/login-page/login/login.html");
 const home = path.join(__dirname, "../public/login-page/homepage/home.html");
 const errorPath = path.join(__dirname, "../public/login-page/error/error.html");
+const homePagePath = path.join(__dirname, "../public/login-page/homepage/home.html");
 
 
 
@@ -40,6 +43,20 @@ app.get("/login", (req, res) => {
     res.sendFile(loginPath);
 })
 
+app.get("/home", (req, res) => {
+    // const userToken = window.localStorage.getItem('user');
+    res.sendFile(homePagePath); 
+    // if (userToken === undefined) r
+    // es.sendStatus(401);   // unauthorized user
+
+    // jwt.verify(userToken, process.env.JWT_KEY, (err, decoded) => {
+    //     if (err => res.sendStatus(403));     // Forbidden client error status
+
+    //     res.sendFile(homePagePath);
+    // })
+
+})
+
 //getting request from fetchApi for checking login credentials
 app.post("/auth", (req, res) => {
     const userData = req.body;
@@ -47,21 +64,29 @@ app.post("/auth", (req, res) => {
     const userPass = userData.password;
     const status = checkAuthentication(userEmail, userPass);
     if (status === true) {
-        return res.send({
-            status: true,
-            data: {
-                name: "std"
-            }
+        const accessToken = jwt.sign(userData, process.env.JWT_KEY);
+        res.json({
+            accessToken: accessToken,
+            status: true
         });
-        
     } else {
         // return false;
-        res.status(401).send({ status: false,
-            err : {
-                msg : "username or password is incorrect"
-            }
-        });
+        res.sendStatus(401);
     }
+})
+
+// getting request from fetchApi for checking logout
+app.post("/logout", (req, res) => {
+    const userToken = req.body.token;
+
+    // console.log(userToken);
+
+    if (userToken === undefined) return res.sendStatus(401)     // unauthorized user
+    jwt.verify(userToken, process.env.JWT_KEY, (err, decoded) => {
+        if (err => res.sendStatus(403));     // Forbidden client error status
+
+        res.send(true);
+    })
 })
 
 app.listen(3000, () => {
