@@ -1,11 +1,10 @@
-
 logout = () => {
     // event.preventDefault();
 
-    logoutApi(window.localStorage.getItem('user'))      //send server the access tien from local Storage
+    logoutApi(window.localStorage.getItem('token'))      //send server the access tien from local Storage
     .then(authStatus => {
         if(authStatus){
-            window.localStorage.removeItem('user');     //remove token from local storage before logout
+            window.localStorage.removeItem('token');     //remove token from local storage before logout
             window.location.href = "../login/login.html";       //after logout redirected to homepage
         }
     }).catch(err => console.log("something went wrong try after some time" + err));
