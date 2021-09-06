@@ -22,6 +22,14 @@ const checkAuthentication = (userEmail, userPass) => {
        return false;
     }
 
+//hash the email id and password
+// hashCredentials = async (userEmail, userPass) => {
+//     const userEmailHash =  await bcrypt.hash(userEmail, 10);
+//     const userPassHash =  await bcrypt.hash(userPass, 10);
+ 
+//      return [userEmailHash, userPassHash];
+//  }
+
 module.exports = {
     checkAuthentication
 }

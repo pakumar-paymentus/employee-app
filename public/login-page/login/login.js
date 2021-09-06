@@ -20,17 +20,16 @@ login = () => {
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
- 
+  console.log(email);
+  console.log(password);
 
   loginApi(email, password)
     .then(userObj => {
       if (userObj.status){
-
-        window.localStorage.setItem('token', userObj.accessToken);
+        console.log(userObj);
+        window.localStorage.setItem('user', userObj.accessToken);
+        // console.log(JSON.parse(window.localStorage.getItem('user')).accessToken);
         window.location.href = "../homepage/home.html";
-        // requestHomePage(window.localStorage.getItem("token"))
-        // .then(() => console.log("login successfully"))
-        // .catch(err => console.log(err))
       }
     })
     .catch(err => {
@@ -48,8 +47,7 @@ loginApi =  (email, password) => {
    return fetch("/auth", {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json',
-      'credentials' : 'same-origin'
+      'Content-Type': 'application/json'
     },
     body: JSON.stringify(userData),
 
@@ -59,19 +57,8 @@ loginApi =  (email, password) => {
   })
   // .catch( err => console.log(err))
   // console.log(res);
+ 
 
 }
 
-// requestHomePage = (token) => {
-//   console.log(tokenObj);
-//   return fetch("/home", {
-//     method: "GET",
-//     headers : {   
-//       'content-Type' : 'application/json',
-//       'token' : token
-//     }
-//   })
-//   .then(res => {
-//     return res.json();
-//   })
-// }
+
