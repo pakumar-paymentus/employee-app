@@ -5,18 +5,6 @@ The project is based on client-server architecture
 ### Prerequisites
 For usiing the app client must install all the dependencies of project
 
-```
-    "bcrypt"
-    "cookie"
-    "cookie-parser"
-    "dotenv":
-    "express":
-    "jsonwebtoken":
-    "mongoose":
-    "nodemon":
-    "validator":
-
-```
 **server is running in the port 3000**
 
 **for registration use** ``` /register```
