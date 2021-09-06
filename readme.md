@@ -1,6 +1,38 @@
-### This is the the login page which is running on the port 3000, which is taking your login credentials and check your athorization.  
+# employee-app-clone  
 
-This is the sample practice project for getting familliar with  backend development.
+The project is based on client-server architecture
+
+### Prerequisites
+For usiing the app client must install all the dependencies of project
+
+```
+    "bcrypt"
+    "cookie"
+    "cookie-parser"
+    "dotenv":
+    "express":
+    "jsonwebtoken":
+    "mongoose":
+    "nodemon":
+    "validator":
+
+```
+**server is running in the port 3000**
+
+**for registration use** ``` /register```
+**for login use** ``` /login```
+
+
+**frontend:** user can login to app if registered, otherwise registration first required
+
+**backend/server:** Authentication. authorization store user data in Database
+Both communicate through a common API.
+
+
+All the client user credentials are stored in the 10bit bcrypt form.
+
+JWT token are used for athorization of a user
+
 
 **admin : Pawan Kumar**
 

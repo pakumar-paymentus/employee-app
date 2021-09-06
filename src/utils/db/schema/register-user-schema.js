@@ -30,9 +30,20 @@ const registerSchema = new mongoose.Schema({
         required: true,
         unique: true
     }, 
-    dob:Date
+    dob:Date,
+    token:{
+        type: String
+    }
+    
 })
-
 const userSchema = new mongoose.model("RegisterUsers", registerSchema);     //pascal convention
 
 module.exports = userSchema;
+
+
+
+// tokens:[{
+//     token:{
+//         type: String
+//     }
+// }]
