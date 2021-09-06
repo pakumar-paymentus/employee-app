@@ -25,12 +25,13 @@ authenticateUser = async (email, password) => {
     }
 }
 
-authorizeUser = async(user, secretKey) => {
+authorizeUser = async(token, secretKey) => {
     try{
-        const  cookie_token = res.cookie.myToken;
-        decodedData = await jwt.verify(cookie_token, secretKey)
+        decodedData = await jwt.verify(token, secretKey)
         if(decodedData === undefined){
             return "someting went wrong please login again";
+        }else{
+            return "Welcome to homePage";
         }
     }catch(err){
         console.log("token is not verified or it expire" + err);
