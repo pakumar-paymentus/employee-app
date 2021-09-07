@@ -1,5 +1,6 @@
 require('dotenv').config({ path: "../.env"});
 const cookieParser = require("cookie-parser");
+const path = require("path");
 
 const express = require("express");
 const app = express();
@@ -12,10 +13,11 @@ app.use(cookieParser);
 const { registerUser, assignTokenToUser } = require("../api/user.services");
 const { authenticateUser, authorizeUser } = require("../api/auth.services");
 
-
+const srcPath = path.join(__dirname, "../");
+const loginPagePath = path.join(srcPath, "../public/login-page/login.html");
 
 router.get("/login", (req, res) => {
-    res.send("welcome to login page");
+    res.sendFile(loginPagePath);
 })
 
 router.get("/register", (req, res) => {
@@ -54,15 +56,15 @@ router.post("/logout", (req, res) => {
     res.send("Welcome to login page");
 });
 
-router.get("/home", async(req, res) => {
-    try{
-        const value = req.cookie.myToken;
-        console.log(value);
-    }catch(err){
-        console.log(err);
-    }
-    // res.send(await authorizeUser(req.cookie.myToken, process.env.JWT_KEY));
-})
+// router.get("/home", async(req, res) => {
+//     try{
+//         const value = req.cookie.myToken;
+//         console.log(value);
+//     }catch(err){
+//         console.log(err);
+//     }
+//     // res.send(await authorizeUser(req.cookie.myToken, process.env.JWT_KEY));
+// })
 
 
 
