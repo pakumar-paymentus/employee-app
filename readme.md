@@ -1,4 +1,4 @@
-# employee-app-clone  
+# employee-app
 
 The project is based on client-server architecture
 
