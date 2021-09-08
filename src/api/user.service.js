@@ -14,6 +14,7 @@ router.post("/logout", (req, res) => {
     res.json({ "messageObj": "you are successfully Logout" });
 })
 
+//This is for check if and only if register user can get the authorize pages:
 // router.get("/home", async (req, res) => {
 //     const token = req.cookies.myToken;
 //     if (token === undefined) {
