@@ -5,10 +5,10 @@ The project is based on client-server architecture
 ### Prerequisites
 For usiing the app client must install all the dependencies of project
 
-**server is running in the port 3000**
+**server is running in the port 5000**
 
-**for registration use** ``` /api/register```
-**for login use** ``` /api/login```
+**for registration use** ``` /api/user/register```
+**for login use** ``` /api/auth/login```
 <div style = "font-family : Courier, monospace">
 on client side the app get you credentials and server checked your you're registered or not.
 If registered then you must be registerd first, server call  serviceApi to registered your details.
