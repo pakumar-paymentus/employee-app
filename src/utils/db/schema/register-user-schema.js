@@ -28,7 +28,6 @@ const registerSchema = new mongoose.Schema({
     mobile:{
         type: Number,
         required: true,
-        unique: true
     }, 
     dob:Date,
     token:{
@@ -39,11 +38,3 @@ const registerSchema = new mongoose.Schema({
 const userSchema = new mongoose.model("RegisterUsers", registerSchema);     //pascal convention
 
 module.exports = userSchema;
-
-
-
-// tokens:[{
-//     token:{
-//         type: String
-//     }
-// }]

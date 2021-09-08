@@ -7,10 +7,12 @@
     <title>Login</title>
     <link rel="stylesheet" href="login.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">   
-<body>
+    <script src="login.js"></script>
+
+    <body>
     <div class="login-container"> <!--main login body-->
         <header>Login Form</header>
-        <form action = "/auth" method="POST">
+        <form action = "/api/login" method="POST">
             <div class="field">
                 <span class="fa fa-user"></span>  <!--user icon-->
                 <input type="text" id = "email" name = "email" placeholder="Email or Phone" required> <!--input email-->
@@ -32,9 +34,6 @@
             <span class="sign-up">Don't have account? <a href="#">Signup Now</a> </span>
         </div>
     </div>
-
-    
-    
-<script src="login.js"></script>
+  
 </body>
 </html>

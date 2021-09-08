@@ -20,8 +20,8 @@ login = () => {
 
   const email = document.getElementById("email").value;
   const password = document.getElementById("password").value;
-  console.log(email);
-  console.log(password);
+  // console.log(email);
+  // console.log(password);
 
   loginApi(email, password)
     .then(userObj => {
@@ -40,11 +40,10 @@ login = () => {
 //  user data is passing to 
 loginApi =  (email, password) => {
   const userData = {
-    email: email,
-    password: password
+    "email": email,
+    "password": password
   }
-  // Default options are marked with *
-   return fetch("/auth", {
+   return fetch("/api/register", {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
