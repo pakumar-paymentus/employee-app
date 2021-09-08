@@ -19,7 +19,7 @@ router.post("/logout", (req, res) => {
 //     if (token === undefined) {
 //         res.send({ "messageObj": "you are not authorize" });
 //     } else
-//         res.send("token");
+//         res.send("Welcome to homePage");
 // })
 
 

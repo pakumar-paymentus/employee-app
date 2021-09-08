@@ -35,6 +35,6 @@ const registerSchema = new mongoose.Schema({
     }
     
 })
-const userSchema = new mongoose.model("RegisterUsers", registerSchema);     //pascal convention
+const userSchema = new mongoose.model("Employees", registerSchema);     //pascal convention
 
 module.exports = userSchema;
